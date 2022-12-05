@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"https://github.com/fadielse/go-webhook/api"
+	"go-webhook/api"
 )
 
 func main() {

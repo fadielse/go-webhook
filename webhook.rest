@@ -1,0 +1,135 @@
+#### Send Webhook from Xcode Cloud
+POST http://localhost:8080/xcloud-webhook
+Content-Type: application/json
+
+{
+  "webhook" : {
+    "id" : "79fe0bcd-3da2-4ad5-800b-e4f4558e5cc0",
+    "name" : "Discord ios-xcloud",
+    "url" : "https://discord.com/api/webhooks/1046725677140934676/haqiK8EMDhTFQcflNzBjxpRXFaOKdd93IWVN5zOYFfBhzdUWzCTJr389tql7yQ_BRrGb"
+  },
+  "app" : {
+    "id" : "1538891654",
+    "type" : "apps"
+  },
+  "ciWorkflow" : {
+    "id" : "F255C080-64F8-4736-ADEF-C84E9C4177F1",
+    "type" : "ciWorkflows",
+    "attributes" : {
+      "name" : "Bareksa Dev",
+      "description" : "",
+      "lastModifiedDate" : "2022-11-10T07:51:32.668Z",
+      "isEnabled" : true,
+      "isLockedForEditing" : false
+    }
+  },
+  "ciProduct" : {
+    "id" : "F52138BB-998E-4523-8877-33009DA873B9",
+    "type" : "ciProducts",
+    "attributes" : {
+      "name" : "Bareksa-Dev",
+      "createdDate" : "2022-09-14T08:59:44.819Z",
+      "productType" : "APP"
+    }
+  },
+  "ciBuildRun" : {
+    "id" : "94a40569-a40a-4442-b7f5-9b39771e896d",
+    "type" : "ciBuildRuns",
+    "attributes" : {
+      "number" : 202,
+      "createdDate" : "2022-12-05T03:35:22.635Z",
+      "startedDate" : "2022-12-05T03:35:36.265Z",
+      "finishedDate" : "2022-12-05T04:49:57.153Z",
+      "sourceCommit" : {
+        "commitSha" : "367055863e8da5ff2d8f74427fb11523af9d13bc",
+        "author" : {
+          "displayName" : "Fadilah Hasan"
+        },
+        "committer" : {
+          "displayName" : "Fadilah Hasan"
+        },
+        "htmlUrl" : "https://gitlab.bareksa.com/ios/Bareksa-iOS/commit/367055863e8da5ff2d8f74427fb11523af9d13bc"
+      },
+      "isPullRequestBuild" : false,
+      "executionProgress" : "COMPLETE",
+      "completionStatus" : "SUCCEEDED"
+    }
+  },
+  "ciBuildActions" : [ {
+    "id" : "ca805f09-5710-4ca9-8499-ed5ae2dbbecc",
+    "type" : "ciBuildActions",
+    "attributes" : {
+      "name" : "TestFlight Internal Testing - iOS",
+      "startedDate" : "2022-12-05T04:49:53.617Z",
+      "finishedDate" : "2022-12-05T04:49:57.153Z",
+      "issueCounts" : {
+        "analyzerWarnings" : 0,
+        "errors" : 0,
+        "testFailures" : 0,
+        "warnings" : 0
+      },
+      "executionProgress" : "COMPLETE",
+      "completionStatus" : "SUCCEEDED",
+      "isRequiredToPass" : true
+    },
+    "relationships" : { }
+  }, {
+    "id" : "d9a07dd9-2993-4da7-bb92-2b7a9dcc1e1e",
+    "type" : "ciBuildActions",
+    "attributes" : {
+      "name" : "Archive - iOS",
+      "actionType" : "ARCHIVE",
+      "startedDate" : "2022-12-05T03:35:36.265Z",
+      "finishedDate" : "2022-12-05T04:49:50.523Z",
+      "issueCounts" : {
+        "analyzerWarnings" : 0,
+        "errors" : 0,
+        "testFailures" : 0,
+        "warnings" : 1247
+      },
+      "executionProgress" : "COMPLETE",
+      "completionStatus" : "SUCCEEDED",
+      "isRequiredToPass" : true
+    },
+    "relationships" : {
+      "build" : {
+        "id" : "b2fdd0c0-8632-4f8c-b143-a9a16053e82d",
+        "type" : "builds",
+        "attributes" : {
+          "platform" : "IOS"
+        }
+      }
+    }
+  } ],
+  "scmProvider" : {
+    "type" : "scmProviders",
+    "attributes" : {
+      "scmProviderType" : {
+        "scmProviderType" : "GITLAB_SELF_MANAGED",
+        "displayName" : "GitLab Self-Managed",
+        "isOnPremise" : true
+      },
+      "endpoint" : "https://gitlab.bareksa.com"
+    }
+  },
+  "scmRepository" : {
+    "id" : "68f1b9a1-e1ab-4ae9-95d4-9d352a9dca49",
+    "type" : "scmRepositories",
+    "attributes" : {
+      "httpCloneUrl" : "https://gitlab.bareksa.com/ios/Bareksa-iOS.git",
+      "sshCloneUrl" : "ssh://git@gitlab.bareksa.com/ios/Bareksa-iOS.git",
+      "ownerName" : "ios",
+      "repositoryName" : "Bareksa-iOS"
+    }
+  },
+  "scmGitReference" : {
+    "id" : "b01ab1ac-4edb-476e-90fe-926a415f0ceb",
+    "type" : "scmGitReferences",
+    "attributes" : {
+      "name" : "dev/platform-new-176-fix",
+      "canonicalName" : "refs/heads/dev/platform-new-176-fix",
+      "isDeleted" : false,
+      "kind" : "BRANCH"
+    }
+  }
+}
