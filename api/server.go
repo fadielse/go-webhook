@@ -76,11 +76,6 @@ func (s *Server) xcloudToDiscord() http.HandlerFunc {
 			Content:   "",
 			Embeds:    embeds}
 
-		// Convert discord into JSON
-		// data, err := json.Marshal(discord)
-		// if err != nil {
-		// 	log.Fatal(err)
-		// }
 		payloadBuf := new(bytes.Buffer)
 		json.NewEncoder(payloadBuf).Encode(discord)
 		req, _ := http.NewRequest("POST", DiscordUrl, payloadBuf)
