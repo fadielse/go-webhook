@@ -61,8 +61,8 @@ type Xcloud struct {
 		Attributes struct {
 			Name         string    `json:"name"`
 			ActionType   string    `json:"actionType"`
-			StartedDate  time.Time `json:"startedDate"`
-			FinishedDate time.Time `json:"finishedDate"`
+			StartedDate  string `json:"startedDate"`
+			FinishedDate string `json:"finishedDate"`
 			IssueCounts  struct {
 				AnalyzerWarnings int `json:"analyzerWarnings"`
 				Errors           int `json:"errors"`
@@ -81,22 +81,6 @@ type Xcloud struct {
 					Platform string `json:"platform"`
 				} `json:"attributes"`
 			} `json:"build"`
-		} `json:"relationships,omitempty"`
-		Attributes0 struct {
-			Name         string    `json:"name"`
-			StartedDate  time.Time `json:"startedDate"`
-			FinishedDate time.Time `json:"finishedDate"`
-			IssueCounts  struct {
-				AnalyzerWarnings int `json:"analyzerWarnings"`
-				Errors           int `json:"errors"`
-				TestFailures     int `json:"testFailures"`
-				Warnings         int `json:"warnings"`
-			} `json:"issueCounts"`
-			ExecutionProgress string `json:"executionProgress"`
-			CompletionStatus  string `json:"completionStatus"`
-			IsRequiredToPass  bool   `json:"isRequiredToPass"`
-		} `json:"attributes,omitempty"`
-		Relationships0 struct {
 		} `json:"relationships,omitempty"`
 	} `json:"ciBuildActions"`
 	ScmProvider struct {

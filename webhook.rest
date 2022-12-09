@@ -1,4 +1,4 @@
-#### Send Webhook from Xcode Cloud
+#### Send Webhook from Xcode Cloud status Completed
 POST http://localhost:8080/xcloud-webhook
 Content-Type: application/json
 
@@ -6,7 +6,7 @@ Content-Type: application/json
   "webhook" : {
     "id" : "79fe0bcd-3da2-4ad5-800b-e4f4558e5cc0",
     "name" : "Discord ios-xcloud",
-    "url" : "https://discord.com/api/webhooks/1046725677140934676/haqiK8EMDhTFQcflNzBjxpRXFaOKdd93IWVN5zOYFfBhzdUWzCTJr389tql7yQ_BRrGb"
+    "url" : "https://discord.com/api/webhooks/1050708948040290324/GGZg9rKJzRJNGE_tSEF_qMpVYeVznTtalIG1Xp0Fy528D-hX0gqYL-fiAnHqNz-LRvuQ"
   },
   "app" : {
     "id" : "1538891654",
@@ -43,7 +43,7 @@ Content-Type: application/json
       "sourceCommit" : {
         "commitSha" : "367055863e8da5ff2d8f74427fb11523af9d13bc",
         "author" : {
-          "displayName" : "Fadilah Hasan"
+          "displayName" : "Iqbal"
         },
         "committer" : {
           "displayName" : "Fadilah Hasan"
@@ -128,6 +128,127 @@ Content-Type: application/json
     "attributes" : {
       "name" : "dev/platform-new-176-fix",
       "canonicalName" : "refs/heads/dev/platform-new-176-fix",
+      "isDeleted" : false,
+      "kind" : "BRANCH"
+    }
+  }
+}
+
+#### Send Webhook from Xcode Cloud status Started
+POST http://localhost:8080/xcloud-webhook
+Content-Type: application/json
+
+{
+  "webhook" : {
+    "id" : "7fa34fcf-83dc-4ab8-82cb-5272f91e7b00",
+    "name" : "Middle Service Discord",
+    "url" : "https://discord.com/api/webhooks/1050708948040290324/GGZg9rKJzRJNGE_tSEF_qMpVYeVznTtalIG1Xp0Fy528D-hX0gqYL-fiAnHqNz-LRvuQ"
+  },
+  "app" : {
+    "id" : "1538891654",
+    "type" : "apps"
+  },
+  "ciWorkflow" : {
+    "id" : "F255C080-64F8-4736-ADEF-C84E9C4177F1",
+    "type" : "ciWorkflows",
+    "attributes" : {
+      "name" : "Bareksa Dev",
+      "description" : "",
+      "lastModifiedDate" : "2022-11-10T07:51:32.668Z",
+      "isEnabled" : true,
+      "isLockedForEditing" : false
+    }
+  },
+  "ciProduct" : {
+    "id" : "F52138BB-998E-4523-8877-33009DA873B9",
+    "type" : "ciProducts",
+    "attributes" : {
+      "name" : "Bareksa-Dev",
+      "createdDate" : "2022-09-14T08:59:44.819Z",
+      "productType" : "APP"
+    }
+  },
+  "ciBuildRun" : {
+    "id" : "760cd6c8-b1ce-4d59-b0fb-179b8f81c4a7",
+    "type" : "ciBuildRuns",
+    "attributes" : {
+      "number" : 214,
+      "createdDate" : "2022-12-09T07:47:06.158Z",
+      "startedDate" : "2022-12-09T07:47:16.948Z",
+      "sourceCommit" : {
+        "commitSha" : "c05cc113faa63c4a6ad08ef2060b4b41be96cc9c",
+        "author" : {
+          "displayName" : "Anjas Dwi"
+        },
+        "committer" : {
+          "displayName" : "Anjas Dwi"
+        },
+        "htmlUrl" : "https://gitlab.bareksa.com/ios/Bareksa-iOS/commit/c05cc113faa63c4a6ad08ef2060b4b41be96cc9c"
+      },
+      "isPullRequestBuild" : false,
+      "executionProgress" : "RUNNING"
+    }
+  },
+  "ciBuildActions" : [ {
+    "id" : "124739fe-9d3d-4b17-909f-5cbe804a42bb",
+    "type" : "ciBuildActions",
+    "attributes" : {
+      "name" : "Archive - iOS",
+      "actionType" : "ARCHIVE",
+      "startedDate" : "2022-12-09T07:47:16.948Z",
+      "issueCounts" : {
+        "analyzerWarnings" : 0,
+        "errors" : 0,
+        "testFailures" : 0,
+        "warnings" : 0
+      },
+      "executionProgress" : "RUNNING",
+      "isRequiredToPass" : true
+    },
+    "relationships" : { }
+  }, {
+    "id" : "4a9d4ab2-8ab8-4970-a202-899c11b7b364",
+    "type" : "ciBuildActions",
+    "attributes" : {
+      "name" : "TestFlight Internal Testing - iOS",
+      "issueCounts" : {
+        "analyzerWarnings" : 0,
+        "errors" : 0,
+        "testFailures" : 0,
+        "warnings" : 0
+      },
+      "executionProgress" : "PENDING",
+      "isRequiredToPass" : true
+    },
+    "relationships" : { }
+  } ],
+  "scmProvider" : {
+    "type" : "scmProviders",
+    "attributes" : {
+      "scmProviderType" : {
+        "scmProviderType" : "GITLAB_SELF_MANAGED",
+        "displayName" : "GitLab Self-Managed",
+        "isOnPremise" : true
+      },
+      "endpoint" : "https://gitlab.bareksa.com"
+    }
+  },
+  "scmRepository" : {
+    "id" : "68f1b9a1-e1ab-4ae9-95d4-9d352a9dca49",
+    "type" : "scmRepositories",
+    "attributes" : {
+      "httpCloneUrl" : "https://gitlab.bareksa.com/ios/Bareksa-iOS.git",
+      "sshCloneUrl" : "ssh://git@gitlab.bareksa.com/ios/Bareksa-iOS.git",
+      "ownerName" : "ios",
+      "repositoryName" : "Bareksa-iOS"
+    }
+  },
+  "scmGitReference" : {
+    "id" : "0ad3ccb6-126d-4b32-bac4-f6cb7cf5d0e9",
+    "type" : "scmGitReferences",
+    "attributes" : {
+      "name" : "dev/btr-240",
+      "canonicalName" : "refs/heads/dev/btr-240",
       "isDeleted" : false,
       "kind" : "BRANCH"
     }

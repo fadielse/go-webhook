@@ -1,18 +1,19 @@
 package api
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"go-webhook/api/model"
+	"io"
 	"io/ioutil"
 	"net/http"
-	"io"
 	"os"
-	"github.com/gorilla/mux"
-	"bytes"
-	"go-webhook/api/model"
-)
+	"strconv"
+	"time"
 
-var DiscordUrl string = "https://discord.com/api/webhooks/1046725677140934676/haqiK8EMDhTFQcflNzBjxpRXFaOKdd93IWVN5zOYFfBhzdUWzCTJr389tql7yQ_BRrGb"
+	"github.com/gorilla/mux"
+)
 
 type Server struct {
 	*mux.Router
@@ -41,23 +42,49 @@ func (s *Server) xcloudToDiscord() http.HandlerFunc {
 			return
 		}
 
+		discordUrl := xcloud.Webhook.URL
 		commitField := model.Field{
 			Name:  "Commit Sha",
-			Value: xcloud.CiBuildRun.Attributes.SourceCommit.CommitSha + "[See Changes](" + xcloud.CiBuildRun.Attributes.SourceCommit.HTMLURL + ")",
+			Value: xcloud.CiBuildRun.Attributes.SourceCommit.CommitSha + " [See Changes](" + xcloud.CiBuildRun.Attributes.SourceCommit.HTMLURL + ")",
 		}
 
 		fields := []model.Field{commitField}
 
+		executionProgress := xcloud.CiBuildRun.Attributes.ExecutionProgress
+		fmt.Println(executionProgress)
+
+		var embedTitle string = ""
+		buildNumber := strconv.Itoa(xcloud.CiBuildRun.Attributes.Number)
+
+		if executionProgress == "RUNNING" {
+			embedTitle = xcloud.CiProduct.Attributes.Name + " (" + buildNumber + ")" + " is starting build :construction_site:"
+		} else if executionProgress == "COMPLETE" {
+			embedTitle = xcloud.CiProduct.Attributes.Name + " (" + buildNumber + ")" + " is ready on TestFlight :rocket:"
+
+			for _, action := range xcloud.CiBuildActions {
+				durationFormatted := getDuration(action.Attributes.StartedDate, action.Attributes.FinishedDate)
+				field := model.Field{
+					Name:  action.Attributes.Name,
+					Value: durationFormatted,
+				}
+
+				fields = append(fields, field)
+			}
+		} else {
+			fmt.Println("No needs to send notification")
+			return
+		}
+
 		embed := model.Embeds{
-			Title:       xcloud.CiProduct.Attributes.Name,
+			Title:       embedTitle,
 			URL:         "",
-			Description: "Lates Commit by **" + xcloud.CiBuildRun.Attributes.SourceCommit.Author.DisplayName + "**",
+			Description: "Author: **" + xcloud.CiBuildRun.Attributes.SourceCommit.Author.DisplayName + "**\n Lates Commit: **" + xcloud.CiBuildRun.Attributes.SourceCommit.Committer.DisplayName + "**",
 			Color:       15258703,
 			Fields:      fields,
 			Thumbnail: struct {
 				URL string "json:\"url\""
 			}{
-				URL: "https://e7.pngegg.com/pngimages/375/318/png-clipart-webhook-slack-form-web-application-world-wide-web-text-logo-thumbnail.png",
+				URL: "https://images.bareksa.com/logo/1.0.0/default-image-news.jpg",
 			},
 			Footer: struct {
 				Text    string "json:\"text\""
@@ -78,7 +105,7 @@ func (s *Server) xcloudToDiscord() http.HandlerFunc {
 
 		payloadBuf := new(bytes.Buffer)
 		json.NewEncoder(payloadBuf).Encode(discord)
-		req, _ := http.NewRequest("POST", DiscordUrl, payloadBuf)
+		req, _ := http.NewRequest("POST", discordUrl, payloadBuf)
 		req.Header.Set("Content-Type", "application/json")
 
 		client := &http.Client{}
@@ -89,5 +116,34 @@ func (s *Server) xcloudToDiscord() http.HandlerFunc {
 		fmt.Println("response Status:", res.Status)
 		// Print the body to the stdout
 		io.Copy(os.Stdout, res.Body)
+	}
+}
+
+// Time Util
+func getDuration(start string, end string) string {
+	t1, err := time.Parse(time.RFC3339, start)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	t2, err := time.Parse(time.RFC3339, end)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	totalSeconds := int(t2.Sub(t1).Seconds())
+
+	hours := totalSeconds / 3600 % 60
+	minutes := totalSeconds / 60 % 60
+	seconds := totalSeconds % 60
+
+	if hours > 0 {
+		return fmt.Sprintf("Duration: **%d Hour %d Minutes %d Seconds**", hours, minutes, seconds)
+	} else if minutes > 0 {
+		return fmt.Sprintf("Duration: **%d Minutes %d Seconds**", minutes, seconds)
+	} else {
+		return fmt.Sprintf("Duration: **%d Seconds**", seconds)
 	}
 }
